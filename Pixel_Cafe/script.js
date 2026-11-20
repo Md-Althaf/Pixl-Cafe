@@ -449,7 +449,7 @@ orderForm.addEventListener("submit", function (event) {
     return sum + item.lineTotal;
   }, 0);
 
-  const tax = subtotal * 0.08;
+  const tax = subtotal * 0.18;
   const total = subtotal + tax;
 
   const id = "#PX-" + Date.now().toString().slice(-6);
