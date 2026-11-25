@@ -491,6 +491,18 @@ footer {
     cursor: pointer;
 }
 
+.food-picture {
+    height: 150px;
+    overflow: hidden;
+    background: #514033;
+}
+
+.food-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 @media(max-width: 850px) {
     .menu-grid {
         grid-template-columns: repeat(2, 1fr);
