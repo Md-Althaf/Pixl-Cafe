@@ -1,27 +1,27 @@
 
 let menu = [
-    { name: "Widow Burger", price: 189, type: "food", emoji: "🍔", desc: "A big burger with a little attitude." },
-    { name: "Deadly Pizza", price: 249, type: "food", emoji: "🍕", desc: "Cheese, sauce and a crispy base." },
-    { name: "Cursed Fries", price: 89, type: "food", emoji: "🍟", desc: "Fries with spicy seasoning." },
-    { name: "Ghost Sandwich", price: 129, type: "food", emoji: "🥪", desc: "A simple sandwich from the shadows." },
-    { name: "Monster Hotdog", price: 149, type: "food", emoji: "🌭", desc: "Loaded with sauce and onions." },
-    { name: "Midnight Noodles", price: 139, type: "food", emoji: "🍜", desc: "Hot noodles for late nights." },
-    { name: "Skull Tacos", price: 169, type: "food", emoji: "🌮", desc: "Crunchy and full of flavour." },
-    { name: "Zombie Nuggets", price: 119, type: "food", emoji: "🍗", desc: "Crispy chicken bites." },
+    { name: "Spooky_cake", price: 189, type: "food", img: "images/spooky_cake.jpg", desc: "A big burger with a little attitude." },
+    { name: "Spooky Roll", price: 249, type: "food", img: "images/Spooky_roll.jpg", desc: "Cheese, sauce and a crispy base." },
+    { name: "Cursed Fries", price: 89, type: "food", img: "images/Curesed_Fries.jpg", desc: "Fries with spicy seasoning." },
+    { name: "Ghost Sandwich", price: 129, type: "food", img: "images/ghost_sanwhiches.jpg", desc: "A simple sandwich from the shadows." },
+    { name: "Monster Hotdog", price: 149, type: "food", img: "images/monster-hotdog.jpg", desc: "Loaded with sauce and onions." },
+    { name: "Midnight Noodles", price: 139, type: "food", img: "images/midnight-noodles.jpg", desc: "Hot noodles for late nights." },
+    { name: "Skull Tacos", price: 169, type: "food", img: "images/skull-tacos.jpg", desc: "Crunchy and full of flavour." },
+    { name: "Zombie Nuggets", price: 119, type: "food", img: "images/zombie-nuggets.jpg", desc: "Crispy chicken bites." },
 
-    { name: "Witch Espresso", price: 99, type: "drinks", emoji: "☕", desc: "Small cup. Big energy." },
-    { name: "Blood Moon Shake", price: 149, type: "drinks", emoji: "🥤", desc: "Strawberry and vanilla shake." },
-    { name: "Blue Ghost Soda", price: 79, type: "drinks", emoji: "🧋", desc: "A strange blue fizzy drink." },
-    { name: "Green Monster", price: 119, type: "drinks", emoji: "🍵", desc: "Minty cold drink." },
-    { name: "Black Magic Coffee", price: 129, type: "drinks", emoji: "🧋", desc: "Cold coffee with chocolate." },
-    { name: "Pumpkin Latte", price: 139, type: "drinks", emoji: "🎃", desc: "Sweet pumpkin coffee." },
+    { name: "Not So Spooky Espresso", price: 99, type: "drinks", img: "images/witch-espresso.jpg", desc: "Small cup. Big energy." },
+    { name: "Blood Moon Shake", price: 149, type: "drinks", img: "images/blood-moon-shake.jpg", desc: "Strawberry and vanilla shake." },
+    { name: "Blue Ghost Soda", price: 79, type: "drinks", img: "images/blue.jpg", desc: "A strange blue fizzy drink." },
+    { name: "Green Monster", price: 119, type: "drinks", img: "images/monster.jpg", desc: "Minty cold drink." },
 
-    { name: "Bloody Donut", price: 89, type: "sweet", emoji: "🍩", desc: "A donut with red icing." },
-    { name: "Spider Cake", price: 159, type: "sweet", emoji: "🍰", desc: "Chocolate cake with cream." },
-    { name: "Skull Cookies", price: 69, type: "sweet", emoji: "🍪", desc: "Crunchy little cookies." },
-    { name: "Ghost Pancakes", price: 139, type: "sweet", emoji: "🥞", desc: "Fluffy pancakes with syrup." },
-    { name: "Witch Cupcake", price: 99, type: "sweet", emoji: "🧁", desc: "Chocolate cupcake with frosting." },
-    { name: "Monster Ice Cream", price: 109, type: "sweet", emoji: "🍦", desc: "Cold, creamy and colourful." }
+    { name: "1 %", price: 129, type: "items", img: "images/1per.jpg", desc: "The Jump scare when there so electricity" },
+    { name: "Exams", price: 139, type: "items", img: "images/exams.jpg", desc: "The most scary/Huanted Thing in this universe" },
+    { name: "Anabella", price: 89, type: "items", img: "images/anabell.jpg", desc: "NO Description needed" },
+    { name: "Mysterious Huanted Item", price: 159, type: "items", img: "images/myt_item.jpg", desc: "Its a Mystery" },
+    { name: "Outsidious", price: 69, type: "items", img: "images/outsidious.jpg", desc: "Its Scarier then Insidious" },
+    { name: "Creepy_Doll", price: 139, type: "items", img: "images/creepy_doll.jpg", desc: "Its A creepy Doll " },
+    { name: "NUN-Not Huanted but scary", price: 99, type: "items", img: "images/nun.jpg", desc: "Nun-Photo Maybe Not Huanted" },
+    { name: "Huanted Combo", price: 109, type: "items", img: "images/combo_items.jpg", desc: "Combo of Huanted Items So , u have 100% chance to get possesed" }
 ];
 
 let cart = [];
@@ -35,7 +35,9 @@ function showMenu(items) {
 
         grid.innerHTML += `
             <div class="food-card">
-                <div class="food-picture">${item.emoji}</div>
+                <div class="food-picture">
+    <img src="${item.img}" alt="${item.name}">
+</div>
                 <h3>${item.name}</h3>
                 <p>${item.desc}</p>
                 <div class="food-bottom">
