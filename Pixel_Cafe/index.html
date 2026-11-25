@@ -1,189 +1,161 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixl Cafe</title>
-  <link rel="stylesheet" href="style.css">
+    <title>The Last Sip</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"> -->
 </head>
 <body>
 
-  <div class="app-shell">
+    <div class="top-note">⚠ OPEN AFTER DARK ONLY ⚠</div>
 
-    <header class="top-bar">
-      <div class="brand">
-        <div class="brand-badge">PX</div>
-        <div>
-          <h1>PIXL CAFE</h1>
-          <p class="subtitle">Order at the Counter or Table</p>
+    <header>
+        <div class="logo">THE LAST SIP <span>☠</span></div>
+        <div class="header-right">
+            <a href="#menu">MENU</a>
+            <a href="#about">ABOUT</a>
+            <a href="#order">ORDER</a>
         </div>
-      </div>
-
-      <div class="view-toggle">
-        <button id="btn-customer-view" class="toggle-btn active" type="button">
-          Customer
-        </button>
-        <button id="btn-kitchen-view" class="toggle-btn" type="button">
-          Kitchen <span id="kitchen-badge" class="badge">0</span>
-        </button>
-      </div>
     </header>
 
-    <main id="customer-view" class="customer-grid">
-
-      <section class="left-panel">
-
-        <div class="card">
-          <h2>1. Where are you sitting?</h2>
-
-          <div class="location-controls">
-            <button id="loc-counter" class="loc-btn active" type="button">
-              Counter Pickup
-            </button>
-
-            <select id="table-select" class="table-select">
-              <option value="">Choose a table...</option>
-              <option value="Table #1">Table #1</option>
-              <option value="Table #2">Table #2</option>
-              <option value="Table #3">Table #3</option>
-              <option value="Table #4">Table #4</option>
-              <option value="Table #5">Table #5</option>
-              <option value="Table #6">Table #6</option>
-              <option value="Table #7">Table #7</option>
-              <option value="Table #8">Table #8</option>
-              <option value="Table #9">Table #9</option>
-              <option value="Table #10">Table #10</option>
-            </select>
-          </div>
-
-          <p class="active-location-bar">
-            Your location: <strong id="selected-location-display">Counter Pickup</strong>
-          </p>
+    <section class="hero">
+        <div class="hero-left">
+            <p class="small-text">WELCOME TO OUR LITTLE NIGHTMARE</p>
+            <h1>Hungry?<br><span>Stay a little.</span></h1>
+            <p class="hero-desc">
+                Coffee, snacks, weird drinks and things we probably
+                shouldn't be serving. Made fresh every night.
+            </p>
+            <a href="#menu" class="menu-link">LOOK AT THE MENU ↓</a>
         </div>
 
-        <div class="card">
-          <h2>2. What's on the menu?</h2>
-          <div id="menu-grid" class="menu-grid"></div>
+        <div class="hero-right">
+            <div class="moon">🌙</div>
+            <div class="ghost">👻</div>
+            <div class="hero-sticker">NO REFUNDS<br>AFTER MIDNIGHT</div>
+            <div class="hero-food">🍔</div>
         </div>
-
-      </section>
-
-      <aside class="right-panel">
-
-        <div class="card">
-
-          <div class="ticket-top">
-            <h2>Your Order</h2>
-            <button id="clear-cart-btn" class="text-btn" type="button">Clear</button>
-          </div>
-
-          <p class="ticket-meta">
-            Location: <strong id="ticket-location">Counter Pickup</strong>
-          </p>
-
-          <div id="cart-items" class="cart-items">
-            <p class="empty-msg">Your order is empty.</p>
-          </div>
-
-          <div class="totals-box">
-            <div class="total-row">
-              <span>Subtotal</span>
-              <span id="subtotal-price">$0.00</span>
-            </div>
-
-            <div class="total-row">
-              <span>Tax (8%)</span>
-              <span id="tax-price">$0.00</span>
-            </div>
-
-            <div class="total-row grand-total">
-              <span>Total</span>
-              <span id="total-price">$0.00</span>
-            </div>
-          </div>
-
-          <form id="order-form">
-
-            <div class="form-title-row">
-              <h3>Your Details</h3>
-              <button id="autofill-btn" class="demo-btn" type="button">
-                Try Sample Order
-              </button>
-            </div>
-
-            <div class="field-group">
-              <label for="customer-name">Your Name</label>
-              <input type="text" id="customer-name" placeholder="Alex Mercer" required>
-            </div>
-
-            <div class="field-group">
-              <label for="customer-email">Email Address</label>
-              <input type="email" id="customer-email" placeholder="alex@example.com" required>
-            </div>
-
-            <button class="submit-btn" type="submit">Send Order</button>
-            <p id="form-error" class="error-msg"></p>
-
-          </form>
-
-        </div>
-      </aside>
-
-    </main>
-
-    <section id="kitchen-view" class="hidden">
-
-      <div class="kitchen-header">
-        <h2>Kitchen</h2>
-
-        <button id="clear-completed-btn" class="secondary-btn" type="button">
-          Clear Finished Orders
-        </button>
-      </div>
-
-      <div id="kitchen-tickets" class="kitchen-grid"></div>
-
     </section>
 
-  </div>
-
-  <div id="confirmation-modal" class="modal-backdrop hidden">
-
-    <div class="modal-ticket">
-
-      <div class="modal-banner">
-        <h2>Order Placed!</h2>
-        <p id="modal-order-id">#PX-104</p>
-      </div>
-
-      <div class="modal-body">
-
-        <p>Name: <strong id="modal-name">Player One</strong></p>
-        <p>Location: <strong id="modal-location">Counter Pickup</strong></p>
-
-        <pre id="modal-items-list" class="receipt-items-pre"></pre>
-
-        <p class="grand-total">
-          Total: <strong id="modal-total">$0.00</strong>
-        </p>
-
-        <div class="modal-actions">
-
-          <button id="modal-kitchen-btn" class="secondary-btn" type="button">
-            Open Kitchen
-          </button>
-
-          <button id="modal-new-order-btn" class="submit-btn" type="button">
-            New Order
-          </button>
-
-        </div>
-      </div>
+    <div class="moving-text">
+        GOOD FOOD BAD DECISIONS  GOOD FOOD BAD DECISIONS ☠
     </div>
-  </div>
 
-  <script src="script.js"></script>
+    <section id="menu" class="menu-section">
+        <div class="section-heading">
+            <div>
+                <p class="small-text">WHAT'S COOKING?</p>
+                <h2>THE MENU <span>✷</span></h2>
+            </div>
+            <p class="menu-note">Everything tastes better<br>when it's a little spooky.</p>
+        </div>
 
+        <div class="category-list">
+            <button class="category active" onclick="filterMenu('all', this)">Everything</button>
+            <button class="category" onclick="filterMenu('food', this)">Food</button>
+            <button class="category" onclick="filterMenu('drinks', this)">Drinks</button>
+            <button class="category" onclick="filterMenu('sweet', this)">Sweet stuff</button>
+        </div>
+
+        <div id="menu-grid" class="menu-grid"></div>
+    </section>
+
+    <section class="special-section">
+        <div>
+            <p>TONIGHT'S QUESTIONABLE SPECIAL</p>
+            <h2>THE BLOOD<br>MOON SHAKE </h2>
+            <p>Strawberry, vanilla, cream and a suspicious amount of red syrup.</p>
+        </div>
+        <div class="special-price">₹149</div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="about-sticker">EST.<br>13TH<br>OCT</div>
+        <div>
+            <p class="small-text">A LITTLE ABOUT US</p>
+            <h2>Not your<br>normal cafe.</h2>
+            <p>
+                We serve food, drinks and questionable experiences.
+                Come with friends. Leave with memories.
+                Or maybe don't ask what happened last night.
+            </p>
+        </div>
+        <div class="about-emoji">🕷️</div>
+    </section>
+
+    <section id="order" class="order-section">
+        <div class="order-title">
+            <p class="small-text">DON'T JUST LOOK AT IT</p>
+            <h2>YOUR ORDER </h2>
+        </div>
+
+        <div class="order-layout">
+            <div class="cart-box">
+                <h3>Your basket</h3>
+                <div id="cart-items">
+                    <p class="empty-cart">Nothing here yet. Go eat something.</p>
+                </div>
+
+                <div class="total-line">
+                    <span>Subtotal</span>
+                    <span id="subtotal-price">₹0</span>
+                </div>
+                <div class="total-line">
+                    <span>Tax (8%)</span>
+                    <span id="tax-price">₹0</span>
+                </div>
+                <div class="total-line grand-total">
+                    <span>Total</span>
+                    <span id="total-price">₹0</span>
+                </div>
+            </div>
+
+            <div class="form-box">
+                <h3>Where should we send it?</h3>
+
+                <form id="order-form">
+                    <label>Your name</label>
+                    <input id="customer-name" type="text" placeholder="Your name" required>
+
+                    <label>Email</label>
+                    <input id="customer-email" type="email" placeholder="you@example.com" required>
+
+                    <label>Choose your place</label>
+                    <select id="table-select">
+                        <option value="Counter pickup">Counter pickup</option>
+                        <option value="Table 1">Table 1</option>
+                        <option value="Table 2">Table 2</option>
+                        <option value="Table 3">Table 3</option>
+                        <option value="Table 4">Table 4</option>
+                        <option value="Table 5">Table 5</option>
+                    </select>
+
+                    <p id="form-error"></p>
+                    <button type="submit" class="order-button">PLACE MY ORDER ☠</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>THE LAST SIP 2026</p>
+        <p>Made somewhere between midnight and 3 AM.</p>
+    </footer>
+
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <h2>ORDER SUMMONED! </h2>
+            <p id="modal-order-id"></p>
+            <p id="modal-name"></p>
+            <p id="modal-location"></p>
+            <div id="modal-items-list"></div>
+            <h3 id="modal-total"></h3>
+            <button onclick="closeModal()" class="order-button">OKAY, BYE</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

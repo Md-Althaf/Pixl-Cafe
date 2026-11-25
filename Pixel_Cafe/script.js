@@ -1,528 +1,182 @@
 
+let menu = [
+    { name: "Widow Burger", price: 189, type: "food", emoji: "🍔", desc: "A big burger with a little attitude." },
+    { name: "Deadly Pizza", price: 249, type: "food", emoji: "🍕", desc: "Cheese, sauce and a crispy base." },
+    { name: "Cursed Fries", price: 89, type: "food", emoji: "🍟", desc: "Fries with spicy seasoning." },
+    { name: "Ghost Sandwich", price: 129, type: "food", emoji: "🥪", desc: "A simple sandwich from the shadows." },
+    { name: "Monster Hotdog", price: 149, type: "food", emoji: "🌭", desc: "Loaded with sauce and onions." },
+    { name: "Midnight Noodles", price: 139, type: "food", emoji: "🍜", desc: "Hot noodles for late nights." },
+    { name: "Skull Tacos", price: 169, type: "food", emoji: "🌮", desc: "Crunchy and full of flavour." },
+    { name: "Zombie Nuggets", price: 119, type: "food", emoji: "🍗", desc: "Crispy chicken bites." },
 
-const menu = [
-  {
-    id: "burger",
-    name: "Classic Burger",
-    price: 8.00,
-    image: "images/burger.webp",
-    tag: "Food",
-    desc: "Juicy burger with cheese."
-  },
-  {
-    id: "croissant",
-    name: "Butter Croissant",
-    price: 3.50,
-    image: "images/croissant.jpg",
-    tag: "Bakery",
-    desc: "Fresh and buttery croissant."
-  },
-  {
-    id: "espresso",
-    name: "Espresso",
-    price: 3.00,
-    image: "images/espresso.webp",
-    tag: "Coffee",
-    desc: "Strong and freshly brewed."
-  },
-  {
-    id: "greentea",
-    name: "Green Tea",
-    price: 3.00,
-    image: "images/greentea.webp",
-    tag: "Drinks",
-    desc: "Light and refreshing green tea."
-  },
-  {
-    id: "water",
-    name: "Sparkling Water",
-    price: 2.00,
-    image: "images/sparkingwater.webp",
-    tag: "Drinks",
-    desc: "Chilled sparkling water."
-  },
-  {
-    id: "chocdonut",
-    name: "Chocolate Donut",
-    price: 2.50,
-    image: "images/chocodonut.jpg",
-    tag: "Donuts",
-    desc: "Donut topped with chocolate."
-  },
-  {
-    id: "strawberrydonut",
-    name: "Strawberry Donut",
-    price: 2.50,
-    image: "images/strawdonut.jpg",
-    tag: "Donuts",
-    desc: "Sweet strawberry glazed donut."
-  },
-  {
-    id: "pancakes",
-    name: "PanCakes",
-    price: 2.00,
-    image: "images/pancakes.webp",
-    tag: "Donuts",
-    desc: "Classic donut with sweet glaze."
-  }
+    { name: "Witch Espresso", price: 99, type: "drinks", emoji: "☕", desc: "Small cup. Big energy." },
+    { name: "Blood Moon Shake", price: 149, type: "drinks", emoji: "🥤", desc: "Strawberry and vanilla shake." },
+    { name: "Blue Ghost Soda", price: 79, type: "drinks", emoji: "🧋", desc: "A strange blue fizzy drink." },
+    { name: "Green Monster", price: 119, type: "drinks", emoji: "🍵", desc: "Minty cold drink." },
+    { name: "Black Magic Coffee", price: 129, type: "drinks", emoji: "🧋", desc: "Cold coffee with chocolate." },
+    { name: "Pumpkin Latte", price: 139, type: "drinks", emoji: "🎃", desc: "Sweet pumpkin coffee." },
+
+    { name: "Bloody Donut", price: 89, type: "sweet", emoji: "🍩", desc: "A donut with red icing." },
+    { name: "Spider Cake", price: 159, type: "sweet", emoji: "🍰", desc: "Chocolate cake with cream." },
+    { name: "Skull Cookies", price: 69, type: "sweet", emoji: "🍪", desc: "Crunchy little cookies." },
+    { name: "Ghost Pancakes", price: 139, type: "sweet", emoji: "🥞", desc: "Fluffy pancakes with syrup." },
+    { name: "Witch Cupcake", price: 99, type: "sweet", emoji: "🧁", desc: "Chocolate cupcake with frosting." },
+    { name: "Monster Ice Cream", price: 109, type: "sweet", emoji: "🍦", desc: "Cold, creamy and colourful." }
 ];
 
+let cart = [];
 
-const saveKey = "pixl_cafe_orders";
+function showMenu(items) {
+    let grid = document.getElementById("menu-grid");
+    grid.innerHTML = "";
 
-let orderLocation = "Counter Pickup";
-let cart = {};
-let orders = [];
+    items.forEach(function(item) {
+        let realIndex = menu.indexOf(item);
 
-// Load saved orders
-
-try {
-  const savedOrders = JSON.parse(localStorage.getItem(saveKey) || "[]");
-
-  if (Array.isArray(savedOrders)) {
-    orders = savedOrders;
-  }
-} catch (error) {
-  orders = [];
+        grid.innerHTML += `
+            <div class="food-card">
+                <div class="food-picture">${item.emoji}</div>
+                <h3>${item.name}</h3>
+                <p>${item.desc}</p>
+                <div class="food-bottom">
+                    <span class="food-price">₹${item.price}</span>
+                    <button class="add-button" onclick="addToCart(${realIndex})">+ ADD</button>
+                </div>
+            </div>
+        `;
+    });
 }
 
-// Get HTML elements
+function filterMenu(type, button) {
+    document.querySelectorAll(".category").forEach(function(btn) {
+        btn.classList.remove("active");
+    });
 
-const btnCustomer = document.getElementById("btn-customer-view");
-const btnKitchen = document.getElementById("btn-kitchen-view");
-const kitchenBadge = document.getElementById("kitchen-badge");
+    button.classList.add("active");
 
-const customerPage = document.getElementById("customer-view");
-const kitchenPage = document.getElementById("kitchen-view");
+    if (type === "all") {
+        showMenu(menu);
+    } else {
+        let filtered = menu.filter(function(item) {
+            return item.type === type;
+        });
 
-const counterBtn = document.getElementById("loc-counter");
-const tableSelect = document.getElementById("table-select");
-
-const locationText = document.getElementById("selected-location-display");
-const ticketLocation = document.getElementById("ticket-location");
-
-const menuGrid = document.getElementById("menu-grid");
-const cartItems = document.getElementById("cart-items");
-
-const subtotalText = document.getElementById("subtotal-price");
-const taxText = document.getElementById("tax-price");
-const totalText = document.getElementById("total-price");
-
-const clearCartBtn = document.getElementById("clear-cart-btn");
-
-const orderForm = document.getElementById("order-form");
-const nameInput = document.getElementById("customer-name");
-const emailInput = document.getElementById("customer-email");
-const autofillBtn = document.getElementById("autofill-btn");
-const errorMsg = document.getElementById("form-error");
-
-const kitchenTickets = document.getElementById("kitchen-tickets");
-const clearReadyBtn = document.getElementById("clear-completed-btn");
-
-const orderPopup = document.getElementById("confirmation-modal");
-const popupId = document.getElementById("modal-order-id");
-const popupName = document.getElementById("modal-name");
-const popupLocation = document.getElementById("modal-location");
-const popupItems = document.getElementById("modal-items-list");
-const popupTotal = document.getElementById("modal-total");
-
-const popupKitchenBtn = document.getElementById("modal-kitchen-btn");
-const popupNewBtn = document.getElementById("modal-new-order-btn");
-
-
-
-
-function saveOrders() {
-  localStorage.setItem(saveKey, JSON.stringify(orders));
-}
-
-
-
-
-function safeText(text) {
-  return String(text).replace(/[&<>"']/g, function (char) {
-    const chars = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    };
-
-    return chars[char];
-  });
-}
-
-
-
-
-function setLocation(newLocation, isCounter) {
-  orderLocation = newLocation;
-
-  locationText.textContent = orderLocation;
-  ticketLocation.textContent = orderLocation;
-
-  counterBtn.classList.toggle("active", isCounter);
-  tableSelect.classList.toggle("active", !isCounter);
-}
-
-
-
-function changeView(view) {
-  const isKitchen = view === "kitchen";
-
-  btnCustomer.classList.toggle("active", !isKitchen);
-  btnKitchen.classList.toggle("active", isKitchen);
-
-  customerPage.classList.toggle("hidden", isKitchen);
-  kitchenPage.classList.toggle("hidden", !isKitchen);
-
-  if (isKitchen) {
-    showKitchen();
-  }
-}
-
-
-
-
-function showMenu() {
-  menuGrid.innerHTML = menu.map(function (item) {
-    const qty = cart[item.id] || 0;
-
-    return `
-      <div class="menu-item">
-
-        <div class="item-top">
-          <span class="item-tag">${safeText(item.tag)}</span>
-          <img class="item-img"
-               src="${item.image}"
-               alt="${safeText(item.name)}">
-        </div>
-
-        <h3 class="item-name">${safeText(item.name)}</h3>
-        <p class="item-desc">${safeText(item.desc)}</p>
-
-        <div class="item-footer">
-
-          <span class="item-price">$${item.price.toFixed(2)}</span>
-
-          <div class="qty-controls">
-
-            <button class="qty-btn"
-                    type="button"
-                    onclick="changeQty('${item.id}', -1)">-</button>
-
-            <span>${qty}</span>
-
-            <button class="qty-btn plus"
-                    type="button"
-                    onclick="changeQty('${item.id}', 1)">+</button>
-
-          </div>
-        </div>
-
-      </div>
-    `;
-  }).join("");
-}
-
-
-
-
-window.changeQty = function (id, amount) {
-  const qty = (cart[id] || 0) + amount;
-
-  if (qty <= 0) {
-    delete cart[id];
-  } else {
-    cart[id] = qty;
-  }
-
-  errorMsg.textContent = "";
-
-  showMenu();
-  showCart();
-};
-
-
-
-
-function showCart() {
-  let subtotal = 0;
-  let rows = [];
-
-  menu.forEach(function (item) {
-    const qty = cart[item.id] || 0;
-
-    if (qty > 0) {
-      const price = item.price * qty;
-
-      subtotal += price;
-
-      rows.push(`
-        <div class="cart-row">
-          <span>${qty}x ${safeText(item.name)}</span>
-          <strong>$${price.toFixed(2)}</strong>
-        </div>
-      `);
+        showMenu(filtered);
     }
-  });
-
-  if (rows.length > 0) {
-    cartItems.innerHTML = rows.join("");
-  } else {
-    cartItems.innerHTML = '<p class="empty-msg">Your order is empty.</p>';
-  }
-
-  const tax = subtotal * 0.08;
-  const total = subtotal + tax;
-
-  subtotalText.textContent = "$" + subtotal.toFixed(2);
-  taxText.textContent = "$" + tax.toFixed(2);
-  totalText.textContent = "$" + total.toFixed(2);
 }
 
+function addToCart(index) {
+    let item = menu[index];
+    let found = cart.find(function(food) {
+        return food.name === item.name;
+    });
 
+    if (found) {
+        found.qty++;
+    } else {
+        cart.push({
+            name: item.name,
+            price: item.price,
+            qty: 1
+        });
+    }
 
-function showKitchen() {
-  const waiting = orders.filter(function (order) {
-    return order.status !== "Ready";
-  }).length;
+    updateCart();
+}
 
-  kitchenBadge.textContent = waiting;
+function changeQty(index, amount) {
+    cart[index].qty += amount;
 
-  if (orders.length === 0) {
-    kitchenTickets.innerHTML = `
-      <div class="card">
-        <p class="empty-msg">No orders yet.</p>
-      </div>
-    `;
-    return;
-  }
+    if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+    }
 
-  kitchenTickets.innerHTML = orders.map(function (order) {
-    const ready = order.status === "Ready";
+    updateCart();
+}
 
-    return `
-      <div class="kds-ticket ${ready ? "ready" : ""}">
+function updateCart() {
+    let cartBox = document.getElementById("cart-items");
+    let subtotal = 0;
 
-        <div class="kds-top">
-          <strong>${safeText(order.id)}</strong>
+    if (cart.length === 0) {
+        cartBox.innerHTML = '<p class="empty-cart">Nothing here yet. Go eat something.</p>';
+    } else {
+        cartBox.innerHTML = "";
 
-          <span class="kds-status">
-            ${ready ? "READY" : "BEING MADE"}
-          </span>
-        </div>
+        cart.forEach(function(item, index) {
+            subtotal += item.price * item.qty;
 
-        <p class="kds-meta">
-          <strong>${safeText(order.location)}</strong>
-          • ${safeText(order.customerName)}
-        </p>
-
-        <ul class="kds-items">
-          ${order.items.map(function (item) {
-            return `
-              <li>${item.qty}x ${safeText(item.name)}</li>
+            cartBox.innerHTML += `
+                <div class="cart-item">
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        ₹${item.price} × ${item.qty}
+                    </div>
+                    <div>
+                        <button onclick="changeQty(${index}, -1)">−</button>
+                        <button onclick="changeQty(${index}, 1)">+</button>
+                    </div>
+                </div>
             `;
-          }).join("")}
-        </ul>
-
-        <button class="ready-btn ${ready ? "completed" : ""}"
-                type="button"
-                onclick="markReady('${order.id}')">
-          ${ready ? "Not Ready" : "Mark Ready"}
-        </button>
-
-      </div>
-    `;
-  }).join("");
-}
-
-
-
-
-window.markReady = function (id) {
-  orders = orders.map(function (order) {
-    if (order.id === id) {
-      return {
-        ...order,
-        status: order.status === "Ready" ? "Preparing" : "Ready"
-      };
+        });
     }
 
-    return order;
-  });
+    let tax = Math.round(subtotal * 0.08);
+    let total = subtotal + tax;
 
-  saveOrders();
-  showKitchen();
-};
+    document.getElementById("subtotal-price").innerText = "₹" + subtotal;
+    document.getElementById("tax-price").innerText = "₹" + tax;
+    document.getElementById("total-price").innerText = "₹" + total;
+}
 
+document.getElementById("order-form").addEventListener("submit", function(event) {
+    event.preventDefault();
 
+    let name = document.getElementById("customer-name").value.trim();
+    let email = document.getElementById("customer-email").value.trim();
+    let location = document.getElementById("table-select").value;
+    let error = document.getElementById("form-error");
 
+    if (cart.length === 0) {
+        error.innerText = "Your cart is empty. Add something first!";
+        return;
+    }
 
-btnCustomer.addEventListener("click", function () {
-  changeView("customer");
+    if (!name || !email) {
+        error.innerText = "Please fill in your details.";
+        return;
+    }
+
+    error.innerText = "";
+
+    let subtotal = 0;
+    let itemList = "";
+
+    cart.forEach(function(item) {
+        subtotal += item.price * item.qty;
+        itemList += `<p>${item.name} × ${item.qty}</p>`;
+    });
+
+    let total = subtotal + Math.round(subtotal * 0.08);
+    let orderNumber = Math.floor(Math.random() * 9000) + 1000;
+
+    document.getElementById("modal-order-id").innerText = "Order #" + orderNumber;
+    document.getElementById("modal-name").innerText = "For: " + name;
+    document.getElementById("modal-location").innerText = "Location: " + location;
+    document.getElementById("modal-items-list").innerHTML = itemList;
+    document.getElementById("modal-total").innerText = "Total: ₹" + total;
+
+    document.getElementById("confirmation-modal").style.display = "flex";
+
+    cart = [];
+    updateCart();
+    document.getElementById("order-form").reset();
 });
 
-btnKitchen.addEventListener("click", function () {
-  changeView("kitchen");
-});
+function closeModal() {
+    document.getElementById("confirmation-modal").style.display = "none";
+}
 
+showMenu(menu);
+updateCart();
 
-
-counterBtn.addEventListener("click", function () {
-  tableSelect.value = "";
-  setLocation("Counter Pickup", true);
-});
-
-
-
-tableSelect.addEventListener("change", function () {
-  if (tableSelect.value) {
-    setLocation(tableSelect.value, false);
-  } else {
-    setLocation("Counter Pickup", true);
-  }
-});
-
-
-
-clearCartBtn.addEventListener("click", function () {
-  cart = {};
-  errorMsg.textContent = "";
-
-  showMenu();
-  showCart();
-});
-
-
-
-
-autofillBtn.addEventListener("click", function () {
-  nameInput.value = "Player One";
-  emailInput.value = "player1@pixlcafe.dev";
-
-  errorMsg.textContent = "";
-
-  if (Object.keys(cart).length === 0) {
-    cart.espresso = 2;
-    cart.croissant = 1;
-  }
-
-  showMenu();
-  showCart();
-});
-
-
-
-orderForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  errorMsg.textContent = "";
-
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-
-  const chosen = menu.filter(function (item) {
-    return cart[item.id] > 0;
-  }).map(function (item) {
-    const qty = cart[item.id];
-
-    return {
-      name: item.name,
-      qty: qty,
-      lineTotal: item.price * qty
-    };
-  });
-
-  if (chosen.length === 0) {
-    errorMsg.textContent = "Add something to your order first.";
-    return;
-  }
-
-  if (!name || !email) {
-    errorMsg.textContent = "Please fill in your details.";
-    return;
-  }
-
-  const subtotal = chosen.reduce(function (sum, item) {
-    return sum + item.lineTotal;
-  }, 0);
-
-  const tax = subtotal * 0.18;
-  const total = subtotal + tax;
-
-  const id = "#PX-" + Date.now().toString().slice(-6);
-
-  const itemsText = chosen.map(function (item) {
-    return `${item.qty}x ${item.name} - $${item.lineTotal.toFixed(2)}`;
-  }).join("\n");
-
-  const newOrder = {
-    id: id,
-    customerName: name,
-    customerEmail: email,
-    location: orderLocation,
-    items: chosen,
-    subtotal: subtotal,
-    tax: tax,
-    total: total,
-    status: "Preparing"
-  };
-
-  orders.unshift(newOrder);
-
-  saveOrders();
-  showKitchen();
-
-
-
-  popupId.textContent = id;
-  popupName.textContent = name;
-  popupLocation.textContent = orderLocation;
-  popupItems.textContent = itemsText;
-  popupTotal.textContent = "$" + total.toFixed(2);
-
-  orderPopup.classList.remove("hidden");
-
-
-
-  cart = {};
-
-  showMenu();
-  showCart();
-});
-
-
-
-
-clearReadyBtn.addEventListener("click", function () {
-  orders = orders.filter(function (order) {
-    return order.status !== "Ready";
-  });
-
-  saveOrders();
-  showKitchen();
-});
-
-
-
-
-popupKitchenBtn.addEventListener("click", function () {
-  orderPopup.classList.add("hidden");
-  changeView("kitchen");
-});
-
-
-
-
-popupNewBtn.addEventListener("click", function () {
-  orderPopup.classList.add("hidden");
-});
-
-
-
-
-showMenu();
-showCart();
-showKitchen();
