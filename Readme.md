@@ -1,28 +1,28 @@
-# Pixl_Cafe 
+# Dark_Cafe 
 
-Pixl Cafe is a demo website based on a cafe ordering system. Its made to feel like a real cafe where customers can choose their food, place orders and the kitchen can manage them.
+Dark Cafe is a demo website based on a dark cafe ordering system . It got Horror vibes U can order haunted items and spooky food over here . 
 
-It's just a fun project to practice with, see how cafe ordering systems work and maybe get a small idea of how things work if your planning to join a cafe for a part time job.
+Its just a fun project to practice with, see how dark shop ordering systems work and maybe get a small idea of how things work if your planning to join a cafe for a part time job (just hopefully not a haunted one lol).
 
 Have fun checking it out!
 
 ## Why I Made This Project?
 
-The idea was to make something related to cafes, but not just another normal website.
+The idea was to make something related to cafes, but not just another normal boring website.
 
-I wanted to build something that could actually be useful, so I decided to make a simple cafe ordering system where you can select items, add them to your order and send them to the kitchen.
+I wanted to build something that could actually be useful, so I decided to make a simple dark shop ordering system where you can select haunted items, add them to your order and send them to the kitchen.
 
-Its a small demo, but I wanted it to feel close to an actual cafe system.
+Its a small demo, but I wanted it to feel close to an actual cafe system, just way more creepy.
 
-## Menu 
-1. Burger
-2. Chocolate Donut
-3. Strawberry Donut
-4. Sparkling Water
-5. Espresso
-6. Green Tea
-7. Pancakes
-8. Butter Croissant
+## Haunted Menu 
+1. Cursed Burger
+2. Blood Chocolate Donut
+3. Haunted Strawberry Donut
+4. Ghostly Sparkling Water
+5. Midnight Espresso
+6. Witch's Green Tea
+7. Phantom Pancakes
+8. Shadow Butter Croissant
 
 ## Built With
 
@@ -37,14 +37,7 @@ No extra setup is needed.
 1. Download or clone this repository.
 2. Open the project folder.
 3. Open `index.html` in your browser.
-4. Start adding items and placing orders.
+4. Start adding haunted items and placing orders.
 
 ## Small Note for Reviews
-
-I actually completed this project in one straight session.
-
-It took me **4 hours and 42 minutes** to finish the project, and then some extra time for adding this README.
-
-I kinda forgot to commit my changes regulary because I was too focused on getting everything done. Ended up locking in for almost 5 hours straight lol.
-
-Definately something I'll try to improve in my next project. 
+Actually this project was from Pixl but it ended so i converted this to Dark themed and i directly convert that .
